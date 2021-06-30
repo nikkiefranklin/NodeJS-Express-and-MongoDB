@@ -51,42 +51,25 @@ app.use(session({
   store: new FileStore()
 }));
 
-//auth function
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
 function auth(req, res, next) {
-  console.log(req.session);
+    console.log(req.session);
 
-  if (!req.session.user) {
-    const authHeader = req.headers.authorization; // authHeader is in base64(username:password)  so we need to decode the base64
-    if (!authHeader) {
-      const err = new Error('You are not authenticated!');
-      res.setHeader('WWW-Authenticate', 'Basic');
-      err.status = 401;
-      return next(err);
-    }
-
-    const auth = Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
-    const user = auth[0];
-    const pass = auth[1];
-    if (user === 'admin' && pass === 'password') { // Is the username/password correct?
-      req.session.user = 'admin';
-      return next(); // authorized
+    if (!req.session.user) {
+        const err = new Error('You are not authenticated!');
+        err.status = 401;
+        return next(err);
     } else {
-      const err = new Error('You are not authenticated!');
-      res.setHeader('WWW-Authenticate', 'Basic');
-      err.status = 401;
-      return next(err);
+        if (req.session.user === 'authenticated') {
+            return next();
+        } else {
+            const err = new Error('You are not authenticated!');
+            err.status = 401;
+            return next(err);
+        }
     }
-  } else {
-    if (req.session.user === 'admin') {
-      console.log('req.session:', req.session);
-      return next();
-    } else {
-      const err = new Error('You are not authenticated!');
-      err.status = 401;
-      return next(err);
-    }
-  }
-
 }
 
 //auth method
