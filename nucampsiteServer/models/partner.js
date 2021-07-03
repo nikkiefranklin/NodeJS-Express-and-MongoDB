@@ -1,3 +1,4 @@
+//mongoose model folder from mongoose
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
