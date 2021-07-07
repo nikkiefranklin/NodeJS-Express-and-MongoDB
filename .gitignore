@@ -1,9 +1,9 @@
 node_modules
+nucampsiteServer/config.js
 nucampsiteServer/bin/server.key
 nucampsiteServer/bin/server.cert
 Week 1 Quiz_ Express Knowledge Check_ Attempt review.pdf
 Week 1 Quiz_ Node Modules Knowledge Check_ Attempt review.pdf
-nucampsiteServer/config.js
 Week 2 Quiz_ MongoDB_ Attempt review.pdf
 Week 3 Quiz_ Authentication_ Attempt review.pdf
-config.js
+New folder/config.js
